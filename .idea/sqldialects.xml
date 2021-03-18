@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/mysql/1.Foundations/01 Creating Tables.sql" dialect="SparkSQL" />
+    <file url="file://$PROJECT_DIR$/mysql/1.Foundations/02 Inserting Into Tables.sql" dialect="SparkSQL" />
+    <file url="file://$PROJECT_DIR$/mysql/1.Foundations/03 Working with Temporary Tables.sql" dialect="SparkSQL" />
+    <file url="PROJECT" dialect="SparkSQL" />
+  </component>
+</project>
