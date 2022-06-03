@@ -2,22 +2,24 @@
 
 ![Twitter Badge](https://img.shields.io/badge/Flink%20Version-1.11%2B-lightgrey)
 
-> :bulb: This example will show how you can use (temporary) views to reuse code and to structure long queries and scripts. 
+> :bulb: This example will show how you can use (temporary) views to reuse code and to structure long queries and scripts.
 
-`CREATE (TEMPORARY) VIEW` defines a view from a query. 
-**A view is not physically materialized.** 
+`CREATE (TEMPORARY) VIEW` defines a view from a query.
+**A view is not physically materialized.**
 Instead, the query is run every time the view is referenced in a query.
 
 Temporary views are very useful to structure and decompose more complicated queries and to re-use queries within a longer script.
-Non-temporary views - stored in a persistent [catalog](https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/catalogs.html) - can also be used to share common queries within your organization, e.g. common filters or pre-processing steps.  
+Non-temporary views - stored in a persistent [catalog](https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/catalogs.html) - can also be used to share common queries within your organization, e.g. common
+filters or pre-processing steps.
 
-Here, we create a view on the `server_logs` that only contains successful requests. 
-This view encapsulates the logic of filtering the logs based on certain `status_code`s. 
-This logic can subsequently be used by any query or script that has access to the catalog.   
+Here, we create a view on the `server_logs` that only contains successful requests.
+This view encapsulates the logic of filtering the logs based on certain `status_code`s.
+This logic can subsequently be used by any query or script that has access to the catalog.
 
 ## Script
 
 ```sql
+/*
 CREATE TABLE server_logs ( 
     client_ip STRING,
     client_identity STRING, 
@@ -38,13 +40,15 @@ CREATE TABLE server_logs (
   'fields.status_code.expression' = '#{regexify ''(200|201|204|400|401|403|301){1}''}',
   'fields.size.expression' = '#{number.numberBetween ''100'',''10000000''}'
 );
+*/
 
-CREATE VIEW successful_requests AS 
-SELECT * 
+CREATE VIEW successful_requests AS
+SELECT *
 FROM server_logs
 WHERE status_code SIMILAR TO '[2,3][0-9][0-9]';
 
-SELECT * FROM successful_requests;
+SELECT *
+FROM successful_requests;
 ```
 
 ## Example Output
